@@ -1,0 +1,23 @@
+# receipts evidence 003
+# kind: transcript
+# represents: The kernel's agent sessions still running after the OpenRig daemon was stopped and started
+# name: daemon-restart
+# at: 2026-10-28T01:48:53Z
+# source: excerpt from the 2026-10-27 test session (Claude Code transcript); copied, not re-run
+# ---
+$ tmux ls
+advisor-lead@kernel: 1 windows (created Sun Oct 25 09:12:42 2026) (attached)
+operator-agent@kernel: 1 windows (created Sun Oct 25 09:12:47 2026) (attached)
+operator-human@kernel: 1 windows (created Sun Oct 25 09:12:51 2026) (attached)
+queue-worker@kernel: 1 windows (created Sun Oct 25 09:12:51 2026)
+$ rig daemon stop
+Daemon stopped
+$ tmux ls
+advisor-lead@kernel: 1 windows (created Sun Oct 25 09:12:42 2026) (attached)
+operator-agent@kernel: 1 windows (created Sun Oct 25 09:12:47 2026) (attached)
+operator-human@kernel: 1 windows (created Sun Oct 25 09:12:51 2026) (attached)
+queue-worker@kernel: 1 windows (created Sun Oct 25 09:12:51 2026)
+$ rig start
+Starting daemon...
+Waiting for kernel...
+Kernel ready.

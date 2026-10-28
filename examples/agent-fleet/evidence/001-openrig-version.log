@@ -1,0 +1,9 @@
+# receipts evidence 001
+# kind: transcript
+# represents: OpenRig's CLI reporting the version that was tested
+# name: openrig-version
+# at: 2026-10-28T01:48:53Z
+# source: excerpt from the 2026-10-27 test session (Claude Code transcript); copied, not re-run
+# ---
+$ rig --version
+0.7.4 (6d9e8e27)

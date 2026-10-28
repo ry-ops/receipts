@@ -1,0 +1,15 @@
+# receipts evidence 015
+# kind: formatted
+# represents: Herdr's agent list while two Orca agents were running: the Orca agents don't appear
+# name: herdr-no-orca
+# at: 2026-10-28T01:48:54Z
+# source: excerpt from the 2026-10-27 test session (Claude Code transcript); copied, not re-run
+# redacted: 4 local path(s) replaced with ~/ry-ops
+# ---
+# while two Orca agents were live:
+$ orca terminal list
+term_767fd16a-ec1e-4cd5-ab36-63b71c151df8  Slugify accent transliteration in slug.py  connected  orphaned  host=local  ~/ry-ops/orca/workspaces/lab/accents
+term_367a51d7-1215-42f8-9b62-c8962500cdc1  Slugify empty result fallback  connected  orphaned  host=local  ~/ry-ops/orca/workspaces/lab/empty
+# herdr agent list (JSON, formatted by a one-line script): only the OpenRig kernel panes
+- claude idle w2:p2 ~/ry-ops
+- claude blocked w2:p4 ~/ry-ops

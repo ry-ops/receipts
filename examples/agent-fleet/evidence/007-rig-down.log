@@ -1,0 +1,13 @@
+# receipts evidence 007
+# kind: transcript
+# represents: Tearing the lab team down with a snapshot, leaving no lab sessions in tmux
+# name: rig-down
+# at: 2026-10-28T01:48:54Z
+# source: excerpt from the 2026-10-27 test session (Claude Code transcript); copied, not re-run
+# ---
+$ rig down lab --snapshot
+Before stopping 01M5Z6XK6XQQ2FXTZXQMMDSYHW: recorded agent sessions: dev-build@lab (activity: idle), dev-review@lab (activity: idle).
+Rig 01M5Z6XK6XQQ2FXTZXQMMDSYHW stopped. 2 session(s) killed.
+Snapshot: 01M5Z78PWNDSX2JM2K9ARR743K
+To restore: rig up 'lab' --existing
+$ tmux ls | grep lab

@@ -1,0 +1,58 @@
+{
+  "https://onorca.dev/\nThe agent development environment": {
+    "url": "https://onorca.dev/",
+    "text": "The agent development environment",
+    "found": true,
+    "checked_at": "2026-10-28T01:49:45Z",
+    "context": "orca - the agent development environment orca docs changelog enterprise 108.1k download backed by ship 100x wi"
+  },
+  "https://herdr.dev/\nHerdr is where your coding agents live": {
+    "url": "https://herdr.dev/",
+    "text": "Herdr is where your coding agents live",
+    "found": true,
+    "checked_at": "2026-10-28T01:49:45Z",
+    "context": "nd ink paper the agent runtime run them anywhere. leave them running. herdr is where your coding agents live. however many you run, across however many projects, each in its own "
+  },
+  "https://herdr.dev/\nHerdr doesn't wrap them or replace them": {
+    "url": "https://herdr.dev/",
+    "text": "Herdr doesn't wrap them or replace them",
+    "found": true,
+    "checked_at": "2026-10-28T01:49:45Z",
+    "context": "ready run. → claude code, codex, cursor, opencode, grok and the rest. herdr doesn't wrap them or replace them, it just owns their terminals - one binary for macos, linux, and wind"
+  },
+  "https://herdr.dev/\nHerdr isn't an app you keep open": {
+    "url": "https://herdr.dev/",
+    "text": "Herdr isn't an app you keep open",
+    "found": true,
+    "checked_at": "2026-10-28T01:49:45Z",
+    "context": "task. nobody is attached to any of it right now. 01 always running. → herdr isn't an app you keep open. it's a server running in the background, and the terminals live insi"
+  },
+  "https://openrig.dev/blog\nOpenRig is the Terraform for Coding Agents": {
+    "url": "https://openrig.dev/blog",
+    "text": "OpenRig is the Terraform for Coding Agents",
+    "found": true,
+    "checked_at": "2026-10-28T01:49:45Z",
+    "context": "ent things. and the layer that connects them turned out to be simple. openrig is the terraform for coding agents (launch demo) 11 april 2026 define a team of claude code and codex ag"
+  },
+  "https://raw.githubusercontent.com/mvschwarz/openrig/main/README.md\nA harness wraps a model. A rig wraps your harnesses.": {
+    "url": "https://raw.githubusercontent.com/mvschwarz/openrig/main/README.md",
+    "text": "A harness wraps a model. A rig wraps your harnesses.",
+    "found": true,
+    "checked_at": "2026-10-28T01:49:45Z",
+    "context": "enrig?style=social)](https://github.com/mvschwarz/openrig/stargazers) a harness wraps a model. a rig wraps your harnesses. define your agent team in yaml, boot it with one command. claude code"
+  },
+  "https://raw.githubusercontent.com/mvschwarz/openrig/main/README.md\nOpenRig doesn't guarantee it can preserve or roll back these files, so back them up first": {
+    "url": "https://raw.githubusercontent.com/mvschwarz/openrig/main/README.md",
+    "text": "OpenRig doesn't guarantee it can preserve or roll back these files, so back them up first",
+    "found": true,
+    "checked_at": "2026-10-28T01:49:45Z",
+    "context": "s; `workshop`, for example, ships with broad access. > - **backups:** openrig doesn't guarantee it can preserve or roll back these files, so back them up first. > > [everything openrig writes, and why →](https://github.com/mvschw"
+  },
+  "https://raw.githubusercontent.com/mvschwarz/openrig/main/README.md\nships with broad access": {
+    "url": "https://raw.githubusercontent.com/mvschwarz/openrig/main/README.md",
+    "text": "ships with broad access",
+    "found": true,
+    "checked_at": "2026-10-28T01:49:45Z",
+    "context": " on the team you > choose and your settings; `workshop`, for example, ships with broad access. > - **backups:** openrig doesn't guarantee it can preserve or roll b"
+  }
+}

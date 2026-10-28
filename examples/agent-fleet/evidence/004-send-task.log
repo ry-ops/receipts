@@ -1,0 +1,10 @@
+# receipts evidence 004
+# kind: transcript
+# represents: The bug-fix task sent to the builder, including the mistaken 'two fail'
+# name: send-task
+# at: 2026-10-28T01:48:53Z
+# source: excerpt from the 2026-10-27 test session (Claude Code transcript); copied, not re-run
+# ---
+$ rig send dev-build@lab 'slug.py has a slugify() function and test_slug.py has 3 tests; two fail. Fix slugify so all tests pass with `python3 -m pytest -q` (if pytest is missing, run the test functions directly with python3). Smallest change only, do not edit the tests. Then hand it to dev-review@lab for an independent check and report the result.'
+Sent to dev-build@lab
+Advisory: Delivered without sender identity: this request carried no X-OpenRig-Session header, so your recipient has no way of knowing who sent it.

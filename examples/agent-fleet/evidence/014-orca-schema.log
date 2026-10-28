@@ -1,0 +1,11 @@
+# receipts evidence 014
+# kind: transcript
+# represents: The size of Orca's CLI schema, and the search of it for conflict-related commands
+# name: orca-schema
+# at: 2026-10-28T01:48:54Z
+# source: excerpt from the 2026-10-27 test session (Claude Code transcript); copied, not re-run
+# ---
+$ orca agent-context
+288 commands (schema v1).
+Run `orca agent-context --json` for the full machine-readable command schema.
+# searched the JSON schema for "conflict": no command names or summaries matched

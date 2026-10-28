@@ -1,0 +1,539 @@
+{
+  "generated_by": "receipts 0.2.0",
+  "study": {
+    "title": "Orca, OpenRig and Herdr, and What None of Them Do",
+    "date": "2026-10-27",
+    "tester": "Claude Code",
+    "platform": "the author's Apple silicon Mac",
+    "not_tested": "anything across two machines; Codex or Pi agents; Orca's orchestration commands and automations; OpenRig's watchdog and host pairing.",
+    "url": "https://ry-ops.dev/posts/2026-10-27-orca-openrig-herdr-what-none-of-them-do/"
+  },
+  "subjects": [
+    {
+      "id": "orca",
+      "name": "Orca",
+      "version": "1.4.242",
+      "repo": "https://github.com/stablyai/orca",
+      "site": "https://onorca.dev/",
+      "color": "#22d3ee"
+    },
+    {
+      "id": "openrig",
+      "name": "OpenRig",
+      "version": "0.7.4",
+      "repo": "https://github.com/mvschwarz/openrig",
+      "site": "https://openrig.dev/",
+      "color": "#a78bfa"
+    },
+    {
+      "id": "herdr",
+      "name": "Herdr",
+      "version": "0.9.5",
+      "repo": "https://github.com/herdrdev/herdr",
+      "site": "https://herdr.dev/",
+      "color": "#fbbf24"
+    }
+  ],
+  "legend": {
+    "tested": "Tested",
+    "documented": "Documented, not tested",
+    "not-found": "Not found"
+  },
+  "capabilities": [
+    {
+      "id": "survive-disconnect",
+      "label": "Agents keep running when you disconnect",
+      "gap": false,
+      "cells": {
+        "orca": {
+          "status": "documented",
+          "note": "Has a headless runtime (orca serve). Not tested.",
+          "source": "CLI help: orca --help, 1.4.242"
+        },
+        "openrig": {
+          "status": "tested",
+          "note": "The seats survived a daemon restart because tmux owns them.",
+          "evidence": [
+            "003"
+          ]
+        },
+        "herdr": {
+          "status": "documented",
+          "note": "Herdr's core claim. Not tested by closing the client.",
+          "source": "https://herdr.dev/"
+        }
+      }
+    },
+    {
+      "id": "state-detection",
+      "label": "Working, blocked and idle detection",
+      "gap": false,
+      "cells": {
+        "orca": {
+          "status": "documented",
+          "note": "terminal wait --for tui-idle. Not tested.",
+          "source": "CLI schema: orca agent-context --json, 1.4.242"
+        },
+        "openrig": {
+          "status": "tested",
+          "note": "rig ps flagged needs-input on both seats.",
+          "evidence": [
+            "002"
+          ]
+        },
+        "herdr": {
+          "status": "tested",
+          "note": "Reported blocked about 4s after the prompt, with the rule it matched.",
+          "evidence": [
+            "009"
+          ]
+        }
+      }
+    },
+    {
+      "id": "worktrees",
+      "label": "Each task in its own git worktree",
+      "gap": false,
+      "cells": {
+        "orca": {
+          "status": "tested",
+          "note": "One command made the worktree and started the agent; both branches passed their tests.",
+          "evidence": [
+            "011",
+            "019"
+          ]
+        },
+        "openrig": {
+          "status": "not-found",
+          "note": "Both seats shared one checkout in the test."
+        },
+        "herdr": {
+          "status": "documented",
+          "note": "herdr worktree create exists. Not tested.",
+          "source": "CLI help: herdr worktree, 0.9.5"
+        }
+      }
+    },
+    {
+      "id": "team-queue",
+      "label": "Roles, owned work queue, handoffs",
+      "gap": false,
+      "cells": {
+        "orca": {
+          "status": "documented",
+          "note": "Orchestration runs, tasks, dispatch and gates. Not tested.",
+          "source": "CLI help: orca --help, 1.4.242"
+        },
+        "openrig": {
+          "status": "tested",
+          "note": "The builder handed off to the reviewer through the queue.",
+          "evidence": [
+            "005"
+          ]
+        },
+        "herdr": {
+          "status": "not-found",
+          "note": "It has prompt and wait primitives, not a queue."
+        }
+      }
+    },
+    {
+      "id": "restore",
+      "label": "Bring a stopped team back where it left off",
+      "gap": false,
+      "cells": {
+        "orca": {
+          "status": "documented",
+          "note": "The site promises scrollback restored on restart. Not tested.",
+          "source": "https://onorca.dev/"
+        },
+        "openrig": {
+          "status": "tested",
+          "note": "Teardown, restore, and the builder remembered its work.",
+          "evidence": [
+            "007",
+            "008"
+          ]
+        },
+        "herdr": {
+          "status": "documented",
+          "note": "The site says it resumes agent sessions after a restart. Not tested.",
+          "source": "https://herdr.dev/"
+        }
+      }
+    },
+    {
+      "id": "multi-machine",
+      "label": "More than one machine",
+      "gap": false,
+      "cells": {
+        "orca": {
+          "status": "documented",
+          "note": "SSH worktrees and paired Orca servers. Not tested.",
+          "source": "https://onorca.dev/"
+        },
+        "openrig": {
+          "status": "documented",
+          "note": "A host registry with pairing. Not tested.",
+          "source": "CLI help: rig host, 0.7.4"
+        },
+        "herdr": {
+          "status": "documented",
+          "note": "herdr machine add over SSH. Not tested.",
+          "source": "https://herdr.dev/docs/connecting-machines/"
+        }
+      }
+    },
+    {
+      "id": "search",
+      "label": "Search what agents did before",
+      "gap": false,
+      "cells": {
+        "orca": {
+          "status": "documented",
+          "note": "orca search exists, but returned 'disabled' on this install. One host only, by its own help text.",
+          "evidence": [
+            "013"
+          ],
+          "source": "CLI schema: orca agent-context --json, 1.4.242"
+        },
+        "openrig": {
+          "status": "tested",
+          "note": "rig ask: grep over one rig's transcripts.",
+          "evidence": [
+            "017"
+          ]
+        },
+        "herdr": {
+          "status": "not-found",
+          "note": "Not found."
+        }
+      }
+    },
+    {
+      "id": "scheduled",
+      "label": "Scheduled jobs",
+      "gap": false,
+      "cells": {
+        "orca": {
+          "status": "documented",
+          "note": "orca automations. Not tested.",
+          "source": "CLI help: orca --help, 1.4.242"
+        },
+        "openrig": {
+          "status": "documented",
+          "note": "rig watchdog scheduler. Not tested.",
+          "source": "CLI help: rig watchdog --help, 0.7.4"
+        },
+        "herdr": {
+          "status": "not-found",
+          "note": "Not found."
+        }
+      }
+    },
+    {
+      "id": "shared-memory",
+      "label": "Memory shared across tools and machines",
+      "gap": true,
+      "cells": {
+        "orca": {
+          "status": "not-found",
+          "note": "Search covers one host: 'There is no all-computers search.'",
+          "evidence": [
+            "013"
+          ]
+        },
+        "openrig": {
+          "status": "not-found",
+          "note": "rig ask searches one rig."
+        },
+        "herdr": {
+          "status": "not-found",
+          "note": "Pane scrollback only."
+        }
+      }
+    },
+    {
+      "id": "collision-warning",
+      "label": "A warning before parallel agents collide",
+      "gap": true,
+      "cells": {
+        "orca": {
+          "status": "not-found",
+          "note": "No conflict command in its 288-command CLI schema; a real conflict surfaced only at git merge.",
+          "evidence": [
+            "012",
+            "014"
+          ]
+        },
+        "openrig": {
+          "status": "not-found",
+          "note": "Not found."
+        },
+        "herdr": {
+          "status": "not-found",
+          "note": "Not found."
+        }
+      }
+    },
+    {
+      "id": "capacity-placement",
+      "label": "Placing work by machine capacity or model limits",
+      "gap": true,
+      "cells": {
+        "orca": {
+          "status": "not-found",
+          "note": "It shows usage and rate-limit resets. It doesn't place work by them."
+        },
+        "openrig": {
+          "status": "not-found",
+          "note": "Its roster recommends specialists; no capacity-aware placement found."
+        },
+        "herdr": {
+          "status": "not-found",
+          "note": "Not found."
+        }
+      }
+    },
+    {
+      "id": "one-policy",
+      "label": "One permission and audit policy for all three",
+      "gap": true,
+      "cells": {
+        "orca": {
+          "status": "not-found",
+          "note": "Its own permission settings."
+        },
+        "openrig": {
+          "status": "not-found",
+          "note": "Records posture; the harness enforces, 'never runtime enforcement.'",
+          "evidence": [
+            "016"
+          ]
+        },
+        "herdr": {
+          "status": "not-found",
+          "note": "Its own model: panes run as you."
+        }
+      }
+    }
+  ],
+  "evidence": {
+    "001": {
+      "kind": "transcript",
+      "kind_label": "agent session transcript",
+      "represents": "OpenRig's CLI reporting the version that was tested"
+    },
+    "002": {
+      "kind": "transcript",
+      "kind_label": "agent session transcript",
+      "represents": "OpenRig booting the two-seat lab team from a YAML spec, then both seats waiting on a dialog"
+    },
+    "003": {
+      "kind": "transcript",
+      "kind_label": "agent session transcript",
+      "represents": "The kernel's agent sessions still running after the OpenRig daemon was stopped and started"
+    },
+    "004": {
+      "kind": "transcript",
+      "kind_label": "agent session transcript",
+      "represents": "The bug-fix task sent to the builder, including the mistaken 'two fail'"
+    },
+    "005": {
+      "kind": "transcript",
+      "kind_label": "agent session transcript",
+      "represents": "OpenRig's queue after the builder handed the fix to the reviewer, and the one-line diff"
+    },
+    "006": {
+      "kind": "transcript",
+      "kind_label": "agent session transcript",
+      "represents": "The reviewer's verdict, including its correction of the task"
+    },
+    "007": {
+      "kind": "transcript",
+      "kind_label": "agent session transcript",
+      "represents": "Tearing the lab team down with a snapshot, leaving no lab sessions in tmux"
+    },
+    "008": {
+      "kind": "transcript",
+      "kind_label": "agent session transcript",
+      "represents": "Restoring the team from the snapshot, and the builder recalling its earlier work"
+    },
+    "009": {
+      "kind": "transcript",
+      "kind_label": "agent session transcript",
+      "represents": "Herdr reporting one agent blocked on a permission prompt, and the detection rules it matched",
+      "redacted": "2 local path(s) replaced with ~/ry-ops"
+    },
+    "010": {
+      "kind": "formatted",
+      "kind_label": "tool output, reformatted by the test script",
+      "represents": "Herdr reading the OpenRig kernel's panes, next to OpenRig's own status for the advisor"
+    },
+    "011": {
+      "kind": "transcript",
+      "kind_label": "agent session transcript",
+      "represents": "Orca's summary of the two worktrees its agents worked in",
+      "redacted": "2 local path(s) replaced with ~/ry-ops"
+    },
+    "012": {
+      "kind": "transcript",
+      "kind_label": "agent session transcript",
+      "represents": "Merging the two Orca branches: the first clean, the second conflicting"
+    },
+    "013": {
+      "kind": "transcript",
+      "kind_label": "agent session transcript",
+      "represents": "Orca's session search returning 'disabled', and its help saying search covers one host"
+    },
+    "014": {
+      "kind": "transcript",
+      "kind_label": "agent session transcript",
+      "represents": "The size of Orca's CLI schema, and the search of it for conflict-related commands"
+    },
+    "015": {
+      "kind": "formatted",
+      "kind_label": "tool output, reformatted by the test script",
+      "represents": "Herdr's agent list while two Orca agents were running: the Orca agents don't appear",
+      "redacted": "4 local path(s) replaced with ~/ry-ops"
+    },
+    "016": {
+      "kind": "transcript",
+      "kind_label": "agent session transcript",
+      "represents": "OpenRig's own help text on how permissions are enforced, and rig doctor on spec tracking"
+    },
+    "017": {
+      "kind": "transcript",
+      "kind_label": "agent session transcript",
+      "represents": "OpenRig's rig ask searching the lab team's transcripts with grep"
+    },
+    "018": {
+      "kind": "transcript",
+      "kind_label": "agent session transcript",
+      "represents": "The version of each tool on the test machine"
+    },
+    "019": {
+      "kind": "transcript",
+      "kind_label": "agent session transcript",
+      "represents": "Test results in each Orca worktree after its agent finished"
+    }
+  },
+  "steps": [
+    {
+      "title": "Boot a team from YAML",
+      "sub": "a custom spec with two Claude Code seats",
+      "text": "$ rig up .rigspec/rig.yaml --cwd lab\n  import_rig: ok\n\nRig: 01M5Z6XK6XQQ2FXTZXQMMDSYHW\nDashboard: rig ui open\nStatus: completed\n$ rig ps --nodes --rig lab\nRIG                    SESSION                                LIFECYCLE   ACTIVITY          WORK   ATTN REASON\nlab                    dev-build@lab                          run         needs-input x1    no     yes  permission_prompt\nlab                    dev-review@lab                         run         needs-input x1    no     yes  permission_prompt",
+      "evidence": [
+        "002"
+      ],
+      "kind": "transcript",
+      "approvals": 0,
+      "represents": "OpenRig booting the two-seat lab team from a YAML spec, then both seats waiting on a dialog"
+    },
+    {
+      "title": "Hand the builder one bounded task",
+      "sub": "the task description had a mistake in it: only one test was failing",
+      "text": "test_slug.py has 3 tests; two fail.",
+      "evidence": [
+        "004"
+      ],
+      "kind": "transcript",
+      "approvals": 0,
+      "represents": "The bug-fix task sent to the builder, including the mistaken 'two fail'"
+    },
+    {
+      "title": "The handoff goes through the queue",
+      "sub": "the builder routed it without being told how",
+      "text": "$ rig queue list --destination dev-review@lab\n    \"state\": \"in-progress\",\n    \"summary\": \"Review one-line slugify fix (strip leading/trailing dashes) so test_slug.py passes; tests untouched\",\n$ git diff slug.py\n-    return s\n+    return s.strip(\"-\")",
+      "evidence": [
+        "005"
+      ],
+      "kind": "transcript",
+      "approvals": 0,
+      "represents": "OpenRig's queue after the builder handed the fix to the reviewer, and the one-line diff"
+    },
+    {
+      "title": "An independent review",
+      "sub": "and it corrected the task description",
+      "text": "⏺ The slugify fix passes review with no blocking findings. I've sent the verdict\n  back to the build seat on the queue.\n  What I checked:\n  - The diff is one line. It changes slug.py so the function strips dashes from\n    both ends of the slug. Interior dashes are kept.\n  - The tests are untouched. Git shows no change to test_slug.py.\n  - All three tests pass. I ran them directly with python3 because pytest isn't\n    installed here, which matches what the builder said.\n  - The builder's correction holds. Only the trim test was failing before the\n    fix, not two tests.",
+      "evidence": [
+        "006"
+      ],
+      "kind": "transcript",
+      "approvals": 0,
+      "represents": "The reviewer's verdict, including its correction of the task"
+    },
+    {
+      "title": "Tear the whole team down",
+      "sub": "the processes are gone",
+      "text": "$ rig down lab --snapshot\nBefore stopping 01M5Z6XK6XQQ2FXTZXQMMDSYHW: recorded agent sessions: dev-build@lab (activity: idle), dev-review@lab (activity: idle).\nRig 01M5Z6XK6XQQ2FXTZXQMMDSYHW stopped. 2 session(s) killed.\nSnapshot: 01M5Z78PWNDSX2JM2K9ARR743K\nTo restore: rig up 'lab' --existing\n$ tmux ls | grep lab",
+      "evidence": [
+        "007"
+      ],
+      "kind": "transcript",
+      "approvals": 0,
+      "represents": "Tearing the lab team down with a snapshot, leaving no lab sessions in tmux"
+    },
+    {
+      "title": "Restore it, then ask what it remembers",
+      "sub": "the conversation came back too",
+      "text": "$ rig restore 01M5Z78PWNDSX2JM2K9ARR743K --rig lab\nRestore attempt id: 1025\nStatus: started\n$ rig restore status 1025 --rig lab\nOriginal verdict: fully_restored\n$ rig send dev-build@lab 'Quick check, no tool calls needed: in one sentence, what did you fix earlier in this session, and what did the reviewer say?'\n⏺ I made slugify strip leading and trailing dashes, a one-line change that makes\n  all three tests pass without touching them, and the reviewer said it passes\n  with no blocking findings, noting only that accented titles give broken slugs\n  and all-punctuation titles give an empty slug, both of which predate the fix.",
+      "evidence": [
+        "008"
+      ],
+      "kind": "transcript",
+      "approvals": 0,
+      "represents": "Restoring the team from the snapshot, and the builder recalling its earlier work"
+    }
+  ],
+  "quotes": [
+    {
+      "text": "The agent development environment",
+      "url": "https://onorca.dev/",
+      "found": true,
+      "checked_at": "2026-10-28T01:49:45Z"
+    },
+    {
+      "text": "Herdr is where your coding agents live",
+      "url": "https://herdr.dev/",
+      "found": true,
+      "checked_at": "2026-10-28T01:49:45Z"
+    },
+    {
+      "text": "Herdr doesn't wrap them or replace them",
+      "url": "https://herdr.dev/",
+      "found": true,
+      "checked_at": "2026-10-28T01:49:45Z"
+    },
+    {
+      "text": "Herdr isn't an app you keep open",
+      "url": "https://herdr.dev/",
+      "found": true,
+      "checked_at": "2026-10-28T01:49:45Z"
+    },
+    {
+      "text": "OpenRig is the Terraform for Coding Agents",
+      "url": "https://openrig.dev/blog",
+      "found": true,
+      "checked_at": "2026-10-28T01:49:45Z"
+    },
+    {
+      "text": "A harness wraps a model. A rig wraps your harnesses.",
+      "url": "https://raw.githubusercontent.com/mvschwarz/openrig/main/README.md",
+      "found": true,
+      "checked_at": "2026-10-28T01:49:45Z"
+    },
+    {
+      "text": "OpenRig doesn't guarantee it can preserve or roll back these files, so back them up first",
+      "url": "https://raw.githubusercontent.com/mvschwarz/openrig/main/README.md",
+      "found": true,
+      "checked_at": "2026-10-28T01:49:45Z"
+    },
+    {
+      "text": "ships with broad access",
+      "url": "https://raw.githubusercontent.com/mvschwarz/openrig/main/README.md",
+      "found": true,
+      "checked_at": "2026-10-28T01:49:45Z"
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+# receipts evidence 012
+# kind: transcript
+# represents: Merging the two Orca branches: the first clean, the second conflicting
+# name: merge-conflict
+# at: 2026-10-28T01:48:54Z
+# source: excerpt from the 2026-10-27 test session (Claude Code transcript); copied, not re-run
+# ---
+$ git merge -q --no-edit ry-ops/accents && echo "accents merged"
+accents merged
+$ git merge --no-edit ry-ops/empty
+Auto-merging test_slug.py
+CONFLICT (content): Merge conflict in test_slug.py
+Automatic merge failed; fix conflicts and then commit the result.

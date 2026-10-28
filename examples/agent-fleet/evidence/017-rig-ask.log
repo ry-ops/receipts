@@ -1,0 +1,14 @@
+# receipts evidence 017
+# kind: transcript
+# represents: OpenRig's rig ask searching the lab team's transcripts with grep
+# name: rig-ask
+# at: 2026-10-28T01:48:54Z
+# source: excerpt from the 2026-10-27 test session (Claude Code transcript); copied, not re-run
+# ---
+$ rig ask lab "what was changed in slugify and what did review find"
+Question: what was changed in slugify and what did review find
+
+Rig: lab  [running]  2/2 nodes  uptime: 5m
+Search: grep
+
+Transcript Evidence (48 matches):

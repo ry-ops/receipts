@@ -1,0 +1,17 @@
+# receipts evidence 011
+# kind: transcript
+# represents: Orca's summary of the two worktrees its agents worked in
+# name: orca-worktrees
+# at: 2026-10-28T01:48:54Z
+# source: excerpt from the 2026-10-27 test session (Claude Code transcript); copied, not re-run
+# redacted: 2 local path(s) replaced with ~/ry-ops
+# ---
+$ orca worktree ps
+lab refs/heads/ry-ops/accents  host=local  live:1  pty:yes  unread:yes
+~/ry-ops/orca/workspaces/lab/accents
+preview: add a mapping for ß, ø, æ, ł
+
+lab refs/heads/ry-ops/empty  host=local  live:1  pty:yes  unread:yes
+~/ry-ops/orca/workspaces/lab/empty
+
+scope: local

@@ -1,0 +1,23 @@
+[project]
+name = "receipts"
+version = "0.2.0"
+description = "Write tool comparisons you can prove: capture evidence, label every claim, verify every quote, then build the figures from the evidence."
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.11"
+authors = [{ name = "Ryan Dahlberg" }]
+dependencies = []
+
+[project.scripts]
+receipts = "receipts.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/ry-ops/receipts"
+"Origin story" = "https://ry-ops.dev/posts/2026-10-27-orca-openrig-herdr-what-none-of-them-do/"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/receipts"]

@@ -1,0 +1,17 @@
+# receipts evidence 008
+# kind: transcript
+# represents: Restoring the team from the snapshot, and the builder recalling its earlier work
+# name: restore-recall
+# at: 2026-10-28T01:48:54Z
+# source: excerpt from the 2026-10-27 test session (Claude Code transcript); copied, not re-run
+# ---
+$ rig restore 01M5Z78PWNDSX2JM2K9ARR743K --rig lab
+Restore attempt id: 1025
+Status: started
+$ rig restore status 1025 --rig lab
+Original verdict: fully_restored
+$ rig send dev-build@lab 'Quick check, no tool calls needed: in one sentence, what did you fix earlier in this session, and what did the reviewer say?'
+⏺ I made slugify strip leading and trailing dashes, a one-line change that makes
+  all three tests pass without touching them, and the reviewer said it passes
+  with no blocking findings, noting only that accented titles give broken slugs
+  and all-punctuation titles give an empty slug, both of which predate the fix.

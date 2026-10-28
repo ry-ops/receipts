@@ -1,0 +1,225 @@
+# The study behind "Orca, OpenRig and Herdr, and What None of Them Do"
+# https://ry-ops.dev/posts/2026-10-27-orca-openrig-herdr-what-none-of-them-do/
+#
+# Evidence in evidence/ was copied from the 2026-10-27 test session's Claude Code
+# transcript after the fact, so it is labeled kind: transcript (or formatted,
+# where the test script reformatted a tool's JSON), never kind: run.
+
+[study]
+title = "Orca, OpenRig and Herdr, and What None of Them Do"
+date = "2026-10-27"
+tester = "Claude Code"
+platform = "the author's Apple silicon Mac"
+not_tested = "anything across two machines; Codex or Pi agents; Orca's orchestration commands and automations; OpenRig's watchdog and host pairing."
+url = "https://ry-ops.dev/posts/2026-10-27-orca-openrig-herdr-what-none-of-them-do/"
+
+# Local paths in the evidence are shown with these stand-ins. The real side is
+# written with ~, so the actual home folder is never stored in this repo.
+[redact]
+"~/Projects" = "~/ry-ops/projects"
+"~" = "~/ry-ops"
+
+[[subject]]
+id = "orca"
+name = "Orca"
+version = "1.4.242"
+repo = "https://github.com/stablyai/orca"
+site = "https://onorca.dev/"
+color = "#22d3ee"
+
+[[subject]]
+id = "openrig"
+name = "OpenRig"
+version = "0.7.4"
+repo = "https://github.com/mvschwarz/openrig"
+site = "https://openrig.dev/"
+color = "#a78bfa"
+
+[[subject]]
+id = "herdr"
+name = "Herdr"
+version = "0.9.5"
+repo = "https://github.com/herdrdev/herdr"
+site = "https://herdr.dev/"
+color = "#fbbf24"
+
+# ---------------------------------------------------------------- capabilities
+
+[[capability]]
+id = "survive-disconnect"
+label = "Agents keep running when you disconnect"
+[capability.cells]
+orca = { status = "documented", note = "Has a headless runtime (orca serve). Not tested.", source = "CLI help: orca --help, 1.4.242" }
+openrig = { status = "tested", note = "The seats survived a daemon restart because tmux owns them.", evidence = ["003"], excerpt = "Daemon stopped" }
+herdr = { status = "documented", note = "Herdr's core claim. Not tested by closing the client.", source = "https://herdr.dev/" }
+
+[[capability]]
+id = "state-detection"
+label = "Working, blocked and idle detection"
+[capability.cells]
+orca = { status = "documented", note = "terminal wait --for tui-idle. Not tested.", source = "CLI schema: orca agent-context --json, 1.4.242" }
+openrig = { status = "tested", note = "rig ps flagged needs-input on both seats.", evidence = ["002"], excerpt = "needs-input x1    no     yes  permission_prompt" }
+herdr = { status = "tested", note = "Reported blocked about 4s after the prompt, with the rule it matched.", evidence = ["009"], excerpt = "rule: bash_permission_prompt (region=whole_recent priority=850)" }
+
+[[capability]]
+id = "worktrees"
+label = "Each task in its own git worktree"
+[capability.cells]
+orca = { status = "tested", note = "One command made the worktree and started the agent; both branches passed their tests.", evidence = ["011", "019"], excerpt = "lab refs/heads/ry-ops/accents  host=local  live:1" }
+openrig = { status = "not-found", note = "Both seats shared one checkout in the test.", looked = "rig --help 0.7.4; the test run" }
+herdr = { status = "documented", note = "herdr worktree create exists. Not tested.", source = "CLI help: herdr worktree, 0.9.5" }
+
+[[capability]]
+id = "team-queue"
+label = "Roles, owned work queue, handoffs"
+[capability.cells]
+orca = { status = "documented", note = "Orchestration runs, tasks, dispatch and gates. Not tested.", source = "CLI help: orca --help, 1.4.242" }
+openrig = { status = "tested", note = "The builder handed off to the reviewer through the queue.", evidence = ["005"], excerpt = "Review one-line slugify fix (strip leading/trailing dashes) so test_slug.py passes; tests untouched" }
+herdr = { status = "not-found", note = "It has prompt and wait primitives, not a queue.", looked = "herdr --help 0.9.5" }
+
+[[capability]]
+id = "restore"
+label = "Bring a stopped team back where it left off"
+[capability.cells]
+orca = { status = "documented", note = "The site promises scrollback restored on restart. Not tested.", source = "https://onorca.dev/" }
+openrig = { status = "tested", note = "Teardown, restore, and the builder remembered its work.", evidence = ["007", "008"], excerpt = "Original verdict: fully_restored" }
+herdr = { status = "documented", note = "The site says it resumes agent sessions after a restart. Not tested.", source = "https://herdr.dev/" }
+
+[[capability]]
+id = "multi-machine"
+label = "More than one machine"
+[capability.cells]
+orca = { status = "documented", note = "SSH worktrees and paired Orca servers. Not tested.", source = "https://onorca.dev/" }
+openrig = { status = "documented", note = "A host registry with pairing. Not tested.", source = "CLI help: rig host, 0.7.4" }
+herdr = { status = "documented", note = "herdr machine add over SSH. Not tested.", source = "https://herdr.dev/docs/connecting-machines/" }
+
+[[capability]]
+id = "search"
+label = "Search what agents did before"
+[capability.cells]
+orca = { status = "documented", note = "orca search exists, but returned 'disabled' on this install. One host only, by its own help text.", source = "CLI schema: orca agent-context --json, 1.4.242", evidence = ["013"] }
+openrig = { status = "tested", note = "rig ask: grep over one rig's transcripts.", evidence = ["017"], excerpt = "Search: grep" }
+herdr = { status = "not-found", note = "Not found.", looked = "herdr --help 0.9.5" }
+
+[[capability]]
+id = "scheduled"
+label = "Scheduled jobs"
+[capability.cells]
+orca = { status = "documented", note = "orca automations. Not tested.", source = "CLI help: orca --help, 1.4.242" }
+openrig = { status = "documented", note = "rig watchdog scheduler. Not tested.", source = "CLI help: rig watchdog --help, 0.7.4" }
+herdr = { status = "not-found", note = "Not found.", looked = "herdr --help 0.9.5" }
+
+# The gaps: rows where every cell is not-found.
+
+[[capability]]
+id = "shared-memory"
+label = "Memory shared across tools and machines"
+gap = true
+[capability.cells]
+orca = { status = "not-found", note = "Search covers one host: 'There is no all-computers search.'", looked = "orca agent-context --json notes for search", evidence = ["013"] }
+openrig = { status = "not-found", note = "rig ask searches one rig.", looked = "rig --help 0.7.4" }
+herdr = { status = "not-found", note = "Pane scrollback only.", looked = "herdr --help 0.9.5" }
+
+[[capability]]
+id = "collision-warning"
+label = "A warning before parallel agents collide"
+gap = true
+[capability.cells]
+orca = { status = "not-found", note = "No conflict command in its 288-command CLI schema; a real conflict surfaced only at git merge.", looked = "orca agent-context --json, searched for 'conflict'", evidence = ["012", "014"] }
+openrig = { status = "not-found", note = "Not found.", looked = "rig --help 0.7.4" }
+herdr = { status = "not-found", note = "Not found.", looked = "herdr --help 0.9.5" }
+
+[[capability]]
+id = "capacity-placement"
+label = "Placing work by machine capacity or model limits"
+gap = true
+[capability.cells]
+orca = { status = "not-found", note = "It shows usage and rate-limit resets. It doesn't place work by them.", looked = "https://onorca.dev/ and orca --help" }
+openrig = { status = "not-found", note = "Its roster recommends specialists; no capacity-aware placement found.", looked = "rig --help 0.7.4" }
+herdr = { status = "not-found", note = "Not found.", looked = "herdr --help 0.9.5" }
+
+[[capability]]
+id = "one-policy"
+label = "One permission and audit policy for all three"
+gap = true
+[capability.cells]
+orca = { status = "not-found", note = "Its own permission settings.", looked = "orca --help" }
+openrig = { status = "not-found", note = "Records posture; the harness enforces, 'never runtime enforcement.'", looked = "rig --help 0.7.4", evidence = ["016"] }
+herdr = { status = "not-found", note = "Its own model: panes run as you.", looked = "herdr --help 0.9.5" }
+
+# ---------------------------------------------------------------------- quotes
+
+[[quote]]
+text = "The agent development environment"
+url = "https://onorca.dev/"
+
+[[quote]]
+text = "Herdr is where your coding agents live"
+url = "https://herdr.dev/"
+
+[[quote]]
+text = "Herdr doesn't wrap them or replace them"
+url = "https://herdr.dev/"
+
+[[quote]]
+text = "Herdr isn't an app you keep open"
+url = "https://herdr.dev/"
+
+[[quote]]
+text = "OpenRig is the Terraform for Coding Agents"
+url = "https://openrig.dev/blog"
+
+[[quote]]
+text = "A harness wraps a model. A rig wraps your harnesses."
+url = "https://raw.githubusercontent.com/mvschwarz/openrig/main/README.md"
+
+[[quote]]
+text = "OpenRig doesn't guarantee it can preserve or roll back these files, so back them up first"
+url = "https://raw.githubusercontent.com/mvschwarz/openrig/main/README.md"
+
+[[quote]]
+text = "ships with broad access"
+url = "https://raw.githubusercontent.com/mvschwarz/openrig/main/README.md"
+
+# ---------------------------------------------------------------- replay steps
+
+[[step]]
+title = "Boot a team from YAML"
+sub = "a custom spec with two Claude Code seats"
+evidence = ["002"]
+
+[[step]]
+title = "Hand the builder one bounded task"
+sub = "the task description had a mistake in it: only one test was failing"
+evidence = ["004"]
+excerpt = "test_slug.py has 3 tests; two fail."
+
+[[step]]
+title = "The handoff goes through the queue"
+sub = "the builder routed it without being told how"
+evidence = ["005"]
+
+[[step]]
+title = "An independent review"
+sub = "and it corrected the task description"
+evidence = ["006"]
+excerpt = """⏺ The slugify fix passes review with no blocking findings. I've sent the verdict
+  back to the build seat on the queue.
+  What I checked:
+  - The diff is one line. It changes slug.py so the function strips dashes from
+    both ends of the slug. Interior dashes are kept.
+  - The tests are untouched. Git shows no change to test_slug.py.
+  - All three tests pass. I ran them directly with python3 because pytest isn't
+    installed here, which matches what the builder said.
+  - The builder's correction holds. Only the trim test was failing before the
+    fix, not two tests."""
+
+[[step]]
+title = "Tear the whole team down"
+sub = "the processes are gone"
+evidence = ["007"]
+
+[[step]]
+title = "Restore it, then ask what it remembers"
+sub = "the conversation came back too"
+evidence = ["008"]

@@ -1,0 +1,13 @@
+# receipts evidence 010
+# kind: formatted
+# represents: Herdr reading the OpenRig kernel's panes, next to OpenRig's own status for the advisor
+# name: herdr-sees-openrig
+# at: 2026-10-28T01:48:54Z
+# source: excerpt from the 2026-10-27 test session (Claude Code transcript); copied, not re-run
+# ---
+# herdr pane list --workspace w2 (JSON, formatted by a one-line script)
+w2:p2 operator   agent=claude agent_status=idle
+w2:p3 dashboard  agent_status=unknown
+w2:p4 advisor    agent=claude agent_status=blocked
+# rig ps --nodes --rig kernel (earlier the same session)
+kernel                 advisor-lead@kernel                    run         needs-input x1    no     yes  stale_runtime_hook

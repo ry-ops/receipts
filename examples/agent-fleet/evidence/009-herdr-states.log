@@ -1,0 +1,21 @@
+# receipts evidence 009
+# kind: transcript
+# represents: Herdr reporting one agent blocked on a permission prompt, and the detection rules it matched
+# name: herdr-states
+# at: 2026-10-28T01:48:54Z
+# source: excerpt from the 2026-10-27 test session (Claude Code transcript); copied, not re-run
+# redacted: 2 local path(s) replaced with ~/ry-ops
+# ---
+$ herdr agent wait asker --until blocked --until done --timeout 120000
+# (JSON reply, formatted by the test script) agent_status: blocked
+# (timed by the test script) the wait returned about 4s after the prompt was sent
+$ herdr agent explain asker
+agent: claude
+state: blocked
+manifest: remote:~/ry-ops/.local/state/herdr/agent-detection/remote/claude.toml 2026.10.11.1
+rule: bash_permission_prompt (region=whole_recent priority=850)
+$ herdr agent explain labbot
+agent: claude
+state: idle
+manifest: remote:~/ry-ops/.local/state/herdr/agent-detection/remote/claude.toml 2026.10.11.1
+rule: live_prompt_box (region=prompt_box_body priority=950)

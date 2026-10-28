@@ -1,0 +1,17 @@
+# receipts evidence 013
+# kind: transcript
+# represents: Orca's session search returning 'disabled', and its help saying search covers one host
+# name: orca-search
+# at: 2026-10-28T01:48:54Z
+# source: excerpt from the 2026-10-27 test session (Claude Code transcript); copied, not re-run
+# ---
+$ orca search transliterate --json
+{
+  "ok": true,
+  "result": {
+    "kind": "unavailable",
+    "reason": "disabled"
+  }
+}
+# from orca agent-context --json, notes for `search`:
+Searches one host: this machine, or the paired Orca server named by --environment / --pairing-code. There is no all-computers search.

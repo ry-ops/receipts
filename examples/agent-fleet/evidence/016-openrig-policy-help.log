@@ -1,0 +1,12 @@
+# receipts evidence 016
+# kind: transcript
+# represents: OpenRig's own help text on how permissions are enforced, and rig doctor on spec tracking
+# name: openrig-policy-help
+# at: 2026-10-28T01:48:54Z
+# source: excerpt from the 2026-10-27 test session (Claude Code transcript); copied, not re-run
+# ---
+$ rig --help
+  policy    Teach and record the rig-level permission policy. The team and kernel launch defaults pass allow/ask lists per launch and save none; a selected Claude settings fragment can merge native settings, rules included; the harness-native permissions are the control surface. OpenRig records posture into RigSpec; harness-native permissions enforce — never runtime enforcement. (The context-mode verb formerly at this name is now: rig mode.)
+$ rig doctor
+  [SKIP] spec_live_conformance: No --spec given; spec-vs-live topology not checked.
+       Why: A running rig's spec path is not persisted anywhere (the rigs table has no spec/rigRoot column), so this check cannot discover it.

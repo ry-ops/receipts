@@ -1,0 +1,13 @@
+# receipts evidence 005
+# kind: transcript
+# represents: OpenRig's queue after the builder handed the fix to the reviewer, and the one-line diff
+# name: queue-handoff
+# at: 2026-10-28T01:48:53Z
+# source: excerpt from the 2026-10-27 test session (Claude Code transcript); copied, not re-run
+# ---
+$ rig queue list --destination dev-review@lab
+    "state": "in-progress",
+    "summary": "Review one-line slugify fix (strip leading/trailing dashes) so test_slug.py passes; tests untouched",
+$ git diff slug.py
+-    return s
++    return s.strip("-")

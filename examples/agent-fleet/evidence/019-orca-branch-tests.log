@@ -1,0 +1,22 @@
+# receipts evidence 019
+# kind: transcript
+# represents: Test results in each Orca worktree after its agent finished
+# name: orca-branch-tests
+# at: 2026-10-28T01:49:00Z
+# source: excerpt from the 2026-10-27 test session (Claude Code transcript); copied, not re-run
+# ---
+# in each Orca worktree, after the agent finished:
+=== accents
+ slug.py      | 6 +++++-
+ test_slug.py | 3 +++
+test_basic PASS
+test_collapses PASS
+test_transliterates_accents PASS
+test_trims_dashes PASS
+=== empty
+ slug.py      | 3 ++-
+ test_slug.py | 3 +++
+test_basic PASS
+test_collapses PASS
+test_empty_becomes_untitled PASS
+test_trims_dashes PASS

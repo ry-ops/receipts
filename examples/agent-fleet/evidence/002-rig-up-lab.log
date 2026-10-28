@@ -1,0 +1,17 @@
+# receipts evidence 002
+# kind: transcript
+# represents: OpenRig booting the two-seat lab team from a YAML spec, then both seats waiting on a dialog
+# name: rig-up-lab
+# at: 2026-10-28T01:48:53Z
+# source: excerpt from the 2026-10-27 test session (Claude Code transcript); copied, not re-run
+# ---
+$ rig up .rigspec/rig.yaml --cwd lab
+  import_rig: ok
+
+Rig: 01M5Z6XK6XQQ2FXTZXQMMDSYHW
+Dashboard: rig ui open
+Status: completed
+$ rig ps --nodes --rig lab
+RIG                    SESSION                                LIFECYCLE   ACTIVITY          WORK   ATTN REASON
+lab                    dev-build@lab                          run         needs-input x1    no     yes  permission_prompt
+lab                    dev-review@lab                         run         needs-input x1    no     yes  permission_prompt

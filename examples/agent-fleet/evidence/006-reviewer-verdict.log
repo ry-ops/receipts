@@ -1,0 +1,27 @@
+# receipts evidence 006
+# kind: transcript
+# represents: The reviewer's verdict, including its correction of the task
+# name: reviewer-verdict
+# at: 2026-10-28T01:48:54Z
+# source: excerpt from the 2026-10-27 test session (Claude Code transcript); copied, not re-run
+# ---
+⏺ The slugify fix passes review with no blocking findings. I've sent the verdict
+  back to the build seat on the queue.
+  What I checked:
+  - The diff is one line. It changes slug.py so the function strips dashes from
+    both ends of the slug. Interior dashes are kept.
+  - The tests are untouched. Git shows no change to test_slug.py.
+  - All three tests pass. I ran them directly with python3 because pytest isn't
+    installed here, which matches what the builder said.
+  - The builder's correction holds. Only the trim test was failing before the
+    fix, not two tests. The collapse test already passed because the existing
+    pattern collapses runs of separators.
+  Two non-blocking notes for the user to decide on. Neither is new, and neither
+  is required for this fix:
+  - Accented titles produce broken slugs. For example, "Café crème" becomes
+    "caf-cr-me".
+  - Titles made only of punctuation return an empty slug. Callers may need to
+    handle that.
+  Not checked: I never ran the tests under real pytest. I also didn't re-run the
+  original code to see the trim test fail; that failure comes from reading the
+  code.

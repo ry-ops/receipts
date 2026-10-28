@@ -1,0 +1,56 @@
+/* receipts figures. Dark cards that read the same on light and dark pages.
+   Scoped under .rcpt; the !important rules at the end stop blog prose styles leaking in. */
+.rcpt {
+  --bg: #0b1020; --line: #26306a; --line2: #3a4590; --ink: #f4f6ff; --mute: #aab3dc; --dim: #737db0;
+  --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --sans: -apple-system, BlinkMacSystemFont, "Inter", system-ui, sans-serif;
+  position: relative; margin: 2.4rem 0; padding: 16px; border-radius: 18px; overflow: hidden; isolation: isolate;
+  background: radial-gradient(120% 90% at 0% 0%, #1b1f4a 0%, var(--bg) 58%), var(--bg);
+  border: 1px solid var(--line); color: var(--ink); font: 15px/1.5 var(--sans);
+  box-shadow: 0 22px 50px -22px rgba(76, 29, 149, .55);
+}
+.rcpt svg { display: block; width: 100%; height: auto; }
+.rcpt svg text { font-family: var(--sans); }
+.rcpt-head { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; margin-bottom: 10px; }
+.rcpt-title { font-weight: 700; }
+.rcpt-chip { font: 600 11px/1 var(--mono); text-transform: uppercase; letter-spacing: .08em; padding: 5px 8px; border-radius: 999px; background: rgba(255,255,255,.06); border: 1px solid var(--line2); color: var(--mute); }
+.rcpt-panel { margin-top: 10px; background: rgba(0,0,0,.25); border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; font-size: 14px; color: var(--mute); min-height: 3.2em; }
+.rcpt-panel b { color: var(--ink); }
+.rcpt-st { font: 600 11px/1 var(--mono); text-transform: uppercase; letter-spacing: .06em; padding: 3px 6px; border-radius: 6px; margin-left: 6px; }
+.rcpt-tested { background: rgba(52,211,153,.15); color: #34d399; }
+.rcpt-documented { background: rgba(96,165,250,.15); color: #60a5fa; }
+.rcpt-not-found { background: rgba(115,125,176,.18); color: #aab3dc; }
+.rcpt-legend { display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: 12.5px; color: var(--mute); margin-top: 8px; }
+.rcpt-key { display: inline-block; width: 11px; height: 11px; border-radius: 50%; margin-right: 6px; vertical-align: -1px; }
+.rcpt-key.solid { background: var(--c); }
+.rcpt-key.half { border: 2px solid var(--c); background: linear-gradient(90deg, transparent 50%, var(--c) 50%); }
+.rcpt-key.dash { border: 2px dashed var(--c); }
+.rcpt-rail { display: grid; grid-template-columns: repeat(var(--n, 6), 1fr); gap: 6px; margin: 4px 0 12px; }
+.rcpt-rail button { cursor: pointer; height: 34px; border-radius: 8px; border: 1px solid var(--line2); background: rgba(255,255,255,.03); color: var(--dim); font: 700 12px/1 var(--mono); }
+.rcpt-rail button.done { color: var(--ink); border-color: rgba(167,139,250,.6); }
+.rcpt-rail button[aria-current="step"] { color: #0b1020; background: #a78bfa; border-color: #a78bfa; }
+.rcpt-step { font-weight: 700; margin-bottom: 6px; }
+.rcpt-step small { font-weight: 500; color: var(--mute); margin-left: 6px; }
+.rcpt-term { margin: 0; font: 12.5px/1.55 var(--mono); background: #070b18; border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; white-space: pre; overflow-x: auto; color: #d7defc; min-height: 9.5em; }
+.rcpt-what { margin: 0 0 8px !important; font-size: 13.5px; color: var(--mute) !important; }
+.rcpt-what b { color: var(--ink); }
+.rcpt-shot { display: block; max-width: 100%; height: auto; border-radius: 12px; border: 1px solid var(--line); margin-top: 8px; }
+.rcpt-shot[hidden], .rcpt-term[hidden] { display: none; }
+.rcpt-row { display: flex; gap: 10px; align-items: center; justify-content: space-between; flex-wrap: wrap; margin-top: 10px; }
+.rcpt-count { font: 600 12px/1.3 var(--mono); color: var(--mute); }
+.rcpt-btn { cursor: pointer; font: 600 13px/1 var(--sans); color: var(--mute); background: rgba(255,255,255,.04); border: 1px solid var(--line2); border-radius: 10px; padding: 9px 12px; }
+.rcpt-btn:hover { color: var(--ink); }
+.rcpt :is(button, [role="button"]):focus-visible { outline: 2px solid #22d3ee; outline-offset: 2px; }
+.rcpt .rcpt-rise { opacity: 0; transform: translateY(8px); transform-box: fill-box; }
+.rcpt.on .rcpt-rise { animation: rcpt-rise .6s ease forwards; animation-delay: var(--d, 0s); }
+@keyframes rcpt-rise { to { opacity: 1; transform: none; } }
+.rcpt .rcpt-ghost { stroke-dasharray: 7 7; animation: rcpt-flow 2.4s linear infinite; }
+@keyframes rcpt-flow { to { stroke-dashoffset: -28; } }
+@media (max-width: 560px) { .rcpt { padding: 12px; } .rcpt-term { font-size: 11.5px; } }
+@media (prefers-reduced-motion: reduce) {
+  .rcpt *, .rcpt *::before { animation: none !important; transition: none !important; }
+  .rcpt .rcpt-rise { opacity: 1 !important; transform: none !important; }
+}
+.rcpt, .rcpt-step { color: var(--ink) !important; }
+.rcpt :is(p, pre) { margin: 0; }
+.rcpt .rcpt-panel, .rcpt .rcpt-legend { color: var(--mute) !important; }

@@ -1,0 +1,17 @@
+# receipts evidence 018
+# kind: transcript
+# represents: The version of each tool on the test machine
+# name: versions
+# at: 2026-10-28T01:48:54Z
+# source: excerpt from the 2026-10-27 test session (Claude Code transcript); copied, not re-run
+# ---
+$ rig --version
+0.7.4 (6d9e8e27)
+$ herdr --version
+herdr 0.9.5
+$ orca status
+appRunning: true
+runtimeState: ready
+# Orca.app 1.4.242 (GitHub release v1.4.242, Orca-1.4.242-arm64-mac.zip)
+$ claude --version
+2.1.311 (Claude Code)
